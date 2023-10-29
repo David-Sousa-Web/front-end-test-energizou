@@ -7,6 +7,7 @@
   -webkit-box-shadow: 0 -2.5px 4px 7.5px #dedede;
   -moz-box-shadow: 0 -2.5px 4px 7.5px #dedede;
   box-shadow: 0 -2.5px 4px 7.5px #dedede;
+  position: sticky;
 }
 
 .header-title {

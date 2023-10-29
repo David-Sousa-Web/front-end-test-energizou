@@ -7,7 +7,10 @@
   padding-top: 84px;
   padding-bottom: 40px;
   gap: 62px;
-  background: url();
+  background: url(https://app.energizou.com.br/static/media/waves_dsk.f1cf9a1b.png);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .company-title {
@@ -22,6 +25,7 @@
   -moz-box-shadow: 1px 1px 7px 5.5px #dedede;
   box-shadow: 1px 1px 7px 5.5px #dedede;
   overflow: auto;
+  background-color: white;
 }
 
 .table-container::-webkit-scrollbar {
