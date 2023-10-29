@@ -1,11 +1,14 @@
 import './Global.css'
-import Header from './components/header'
+import Empresa from './components/empresa/empresa'
+import Header from './components/header/header'
 
 export default function App() {
 
   return (
     <>
       <Header />
+
+      <Empresa />
     </>
   )
 }
