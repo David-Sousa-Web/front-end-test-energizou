@@ -1,10 +1,47 @@
-import "./empresa.css"
+import { useEffect, useState } from "react";
+import "./empresa.css";
+import { api } from "../../lib/api";
+export interface Company {
+  id: string;
+  NomedoCliente: string;
+  Senha: string;
+  NomedaEmpresa: string;
+  CNPJ: string;
+  CEP: string;
+  Endereco: string;
+  Numero: number;
+  Telefone: string;
+  Email: string;
+}
 
 export default function Empresa() {
+  const [company, setCompany] = useState<Company[]>([]);
+
+  const getCompany = async () => {
+    try {
+      const response = await api.get("/company");
+
+      return response.data as Company[];
+    } catch (error) {
+      console.error("falha ao procurar as Empresas", error);
+
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedCompany = await getCompany();
+      setCompany(fetchedCompany);
+    };
+    fetchData();
+  }, []);
+
   return (
     <main className="company-container">
       <h1 className="company-title">Empresas</h1>
-      
+
+      <button>Criar</button>
       <section className="table-container">
         <table className="table-content">
           <thead className="thead-container">
@@ -21,119 +58,22 @@ export default function Empresa() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
-            <tr>
-              <td className="td-content">david</td>
-              <td className="td-content">123456</td>
-              <td className="td-content">Tucan</td>
-              <td className="td-content">12314524151</td>
-              <td className="td-content">06433010</td>
-              <td className="td-content">avenida brigadeiro manoel rodrigues jordão</td>
-              <td className="td-content">915</td>
-              <td className="td-content">11960719806</td>
-              <td className="td-content">david01sousa@hotmail.com</td>
-            </tr>
+            {company.map((com) => (
+              <tr>
+                <td className="td-content">{com.NomedoCliente}</td>
+                <td className="td-content">********</td>
+                <td className="td-content">{com.NomedaEmpresa}</td>
+                <td className="td-content">{com.CNPJ}</td>
+                <td className="td-content">{com.CEP}</td>
+                <td className="td-content">{com.Endereco}</td>
+                <td className="td-content">{com.Numero}</td>
+                <td className="td-content">{com.Telefone}</td>
+                <td className="td-content">{com.Email}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </section>
     </main>
-  )
+  );
 }
