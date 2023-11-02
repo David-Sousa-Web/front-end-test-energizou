@@ -41,38 +41,41 @@ export default function Empresa() {
     <main className="company-container">
       <h1 className="company-title">Empresas</h1>
 
-      <button>Criar</button>
-      <section className="table-container">
-        <table className="table-content">
-          <thead className="thead-container">
-            <tr>
-              <th className="th-content">Nome do Cliente</th>
-              <th className="th-content">Senha</th>
-              <th className="th-content">Nome da empresa</th>
-              <th className="th-content">CNPJ</th>
-              <th className="th-content">CEP</th>
-              <th className="th-content">Endereço</th>
-              <th className="th-content">Número</th>
-              <th className="th-content">Telefone</th>
-              <th className="th-content">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {company.map((com) => (
+      <section className="company-content">
+        <button className="create-company">Criar</button>
+
+        <div className="table-container">
+          <table className="table-content">
+            <thead className="thead-container">
               <tr>
-                <td className="td-content">{com.NomedoCliente}</td>
-                <td className="td-content">********</td>
-                <td className="td-content">{com.NomedaEmpresa}</td>
-                <td className="td-content">{com.CNPJ}</td>
-                <td className="td-content">{com.CEP}</td>
-                <td className="td-content">{com.Endereco}</td>
-                <td className="td-content">{com.Numero}</td>
-                <td className="td-content">{com.Telefone}</td>
-                <td className="td-content">{com.Email}</td>
+                <th className="th-content">Nome do Cliente</th>
+                <th className="th-content">Senha</th>
+                <th className="th-content">Nome da empresa</th>
+                <th className="th-content">CNPJ</th>
+                <th className="th-content">CEP</th>
+                <th className="th-content">Endereço</th>
+                <th className="th-content">Número</th>
+                <th className="th-content">Telefone</th>
+                <th className="th-content">Email</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {company.map((com) => (
+                <tr>
+                  <td className="td-content">{com.NomedoCliente}</td>
+                  <td className="td-content">********</td>
+                  <td className="td-content">{com.NomedaEmpresa}</td>
+                  <td className="td-content">{com.CNPJ}</td>
+                  <td className="td-content">{com.CEP}</td>
+                  <td className="td-content">{com.Endereco}</td>
+                  <td className="td-content">{com.Numero}</td>
+                  <td className="td-content">{com.Telefone}</td>
+                  <td className="td-content">{com.Email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
   );
