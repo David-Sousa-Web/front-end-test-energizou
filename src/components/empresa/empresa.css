@@ -128,8 +128,16 @@
   border: none;
 }
 
+.button-trash:hover {
+  cursor: pointer;
+}
+
 .button-edit1 {
   color: transparent;
   outline: none;
   border: none;
+}
+
+.button-edit1 {
+  cursor: pointer;
 }
