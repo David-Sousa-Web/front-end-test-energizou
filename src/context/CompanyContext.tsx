@@ -54,7 +54,7 @@ export function CompanyProvider({ children }: CompanyContextProps) {
       return company;
     });
     setCompanyData(updatedCompanyData);
-    setFilteredCompanyData(updatedCompanyData); // Atualiza os dados filtrados após a atualização
+    setFilteredCompanyData(updatedCompanyData);
   };
 
   const searchByCnpj = (cnpj: string) => {
