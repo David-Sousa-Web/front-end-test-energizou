@@ -56,6 +56,7 @@ export default function NovaEmpresa() {
     const newEmail = event.target.value;
     setEmail(newEmail);
     setIsEmailValid(validateEmail(newEmail));
+  };
 
   async function HandleSubmitCompany(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
