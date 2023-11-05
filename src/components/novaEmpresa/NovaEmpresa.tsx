@@ -55,8 +55,7 @@ export default function NovaEmpresa() {
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
-    setIsEmailValid(validateEmail(newEmail)); // Use a função de validação de e-mail aqui
-  };
+    setIsEmailValid(validateEmail(newEmail));
 
   async function HandleSubmitCompany(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
