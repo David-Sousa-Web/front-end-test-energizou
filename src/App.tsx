@@ -1,16 +1,15 @@
-import './Global.css'
-import Empresa from './components/empresa/empresa'
-import Header from './components/header/header'
+import { BrowserRouter } from "react-router-dom";
+import { Router } from "./Router";
+import { CompanyProvider } from "./context/CompanyContext";
 
 export default function App() {
-
   return (
-    <>
-      <Header />
-
-      <Empresa />
-    </>
-  )
+    <CompanyProvider>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </CompanyProvider>
+  );
 }
 
 // #FFCC00

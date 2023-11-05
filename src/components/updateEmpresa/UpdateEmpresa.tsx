@@ -1,15 +1,18 @@
-import { FormEvent, useState, ChangeEvent } from "react";
+import { ChangeEvent, FormEvent, useContext, useState, useEffect } from "react";
 import { api } from "../../lib/api";
-import "./NovaEmpresa.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { CompanyContext } from "../../context/CompanyContext";
 import InputMask from "react-input-mask";
 import validateEmail from "../../lib/EmailValidator";
+import "../novaEmpresa/NovaEmpresa.css";
 
-export default function NovaEmpresa() {
+export default function UpdateEmpresa() {
+  const { id } = useParams();
   const companyNavigate = useNavigate();
+  const { companyData, updateCompany } = useContext(CompanyContext);
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [postCompany, setPostCompany] = useState({
+  const [updateCompanyState, setUpdateCompany] = useState({
     NomedoCliente: "",
     Senha: "",
     NomedaEmpresa: "",
@@ -18,23 +21,32 @@ export default function NovaEmpresa() {
     Endereco: "",
     Numero: 0,
     Telefone: "",
+    Email: "",
   });
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPostCompany({
-      ...postCompany,
+    setUpdateCompany({
+      ...updateCompanyState,
       [event.target.name]: event.target.value,
     });
-  };
 
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
-    setIsEmailValid(validateEmail(newEmail)); // Use a função de validação de e-mail aqui
+    setIsEmailValid(validateEmail(newEmail));
   };
+
+  useEffect(() => {
+    const companyToUpdate = companyData.find((company) => company.Id === id);
+
+    if (companyToUpdate) {
+      setUpdateCompany(companyToUpdate);
+    }
+  }, [companyData, id]);
 
   async function HandleSubmitCompany(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    updateCompany(id || "", updateCompanyState);
 
     if (!isEmailValid) {
       setIsEmailValid(false);
@@ -42,21 +54,19 @@ export default function NovaEmpresa() {
     }
 
     try {
-      await api.post("/company", {
-        NomedoCliente: postCompany.NomedoCliente,
-        Senha: postCompany.Senha,
-        NomedaEmpresa: postCompany.NomedaEmpresa,
-        CNPJ: postCompany.CNPJ,
-        CEP: postCompany.CEP,
-        Endereco: postCompany.Endereco,
-        Numero: Number(postCompany.Numero),
-        Telefone: postCompany.Telefone,
+      await api.put(`/company/${id}`, {
+        NomedoCliente: updateCompanyState.NomedoCliente,
+        Senha: updateCompanyState.Senha,
+        NomedaEmpresa: updateCompanyState.NomedaEmpresa,
+        CEP: updateCompanyState.CEP,
+        Endereco: updateCompanyState.Endereco,
+        Numero: Number(updateCompanyState.Numero),
+        Telefone: updateCompanyState.Telefone,
         Email: email,
       });
 
-      alert("Empresa Cadastrada com sucesso");
+      alert("Empresa Update com sucesso");
       companyNavigate("/");
-      window.location.reload();
     } catch (error) {
       console.error(error);
       alert("Erro ao Atualizar Empresa");
@@ -65,7 +75,7 @@ export default function NovaEmpresa() {
 
   return (
     <section className="create-company-container">
-      <h1 className="create-company-title">Criar Empresa</h1>
+      <h1 className="create-company-title">Atualizar Empresa</h1>
 
       <form
         action=""
@@ -83,7 +93,7 @@ export default function NovaEmpresa() {
                 id="clienteNome"
                 name="NomedoCliente"
                 onChange={handleInputChange}
-                value={postCompany.NomedoCliente}
+                value={updateCompanyState.NomedoCliente}
                 className="input-company"
                 required
               />
@@ -98,7 +108,7 @@ export default function NovaEmpresa() {
                 id="empresaNome"
                 name="NomedaEmpresa"
                 onChange={handleInputChange}
-                value={postCompany.NomedaEmpresa}
+                value={updateCompanyState.NomedaEmpresa}
                 className="input-company"
                 required
               />
@@ -113,8 +123,8 @@ export default function NovaEmpresa() {
                 type="text"
                 id="email"
                 name="Email"
-                onChange={handleEmailChange}
-                value={email}
+                onChange={handleInputChange}
+                value={updateCompanyState.Email}
                 className={`input-company-email ${
                   isEmailValid ? "" : "invalid-email"
                 }`}
@@ -133,7 +143,7 @@ export default function NovaEmpresa() {
                 id="telefone"
                 name="Telefone"
                 onChange={handleInputChange}
-                value={postCompany.Telefone}
+                value={updateCompanyState.Telefone}
                 className="input-company"
                 required
               />
@@ -153,9 +163,10 @@ export default function NovaEmpresa() {
                 id="cnpj"
                 name="CNPJ"
                 onChange={handleInputChange}
-                value={postCompany.CNPJ}
+                value={updateCompanyState.CNPJ}
                 className="input-company"
                 required
+                disabled
               />
             </div>
           </div>
@@ -169,7 +180,7 @@ export default function NovaEmpresa() {
               id="senha"
               name="Senha"
               onChange={handleInputChange}
-              value={postCompany.Senha}
+              value={updateCompanyState.Senha}
               className="input-company"
               required
             />
@@ -187,7 +198,7 @@ export default function NovaEmpresa() {
               id="cep"
               name="CEP"
               onChange={handleInputChange}
-              value={postCompany.CEP}
+              value={updateCompanyState.CEP}
               className="input-company-cep"
               required
             />
@@ -203,7 +214,7 @@ export default function NovaEmpresa() {
                 id="endereco"
                 name="Endereco"
                 onChange={handleInputChange}
-                value={postCompany.Endereco}
+                value={updateCompanyState.Endereco}
                 className="input-company-address"
                 required
               />
@@ -218,7 +229,7 @@ export default function NovaEmpresa() {
                 id="numero"
                 name="Numero"
                 onChange={handleInputChange}
-                value={postCompany.Numero}
+                value={updateCompanyState.Numero}
                 className="input-company-number"
                 required
               />
@@ -226,7 +237,7 @@ export default function NovaEmpresa() {
           </div>
         </div>
         <button type="submit" className="button-company">
-          Cadastrar
+          Atualizar
         </button>
       </form>
     </section>

@@ -1,0 +1,140 @@
+.create-company-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 84px;
+  padding-bottom: 40px;
+  gap: 62px;
+  background: url(https://app.energizou.com.br/static/media/waves_dsk.f1cf9a1b.png);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.create-company-title {
+  color: #043265;
+}
+
+.create-company-form {
+  width: 55vw;
+  height: 65vh;
+  border-radius: 0.8rem;
+  -webkit-box-shadow: 1px 1px 7px 5.5px #dedede;
+  -moz-box-shadow: 1px 1px 7px 5.5px #dedede;
+  box-shadow: 1px 1px 7px 5.5px #dedede;
+  background-color: white;
+}
+
+.label-text {
+  font-size: 14.4px;
+  color: #666666;
+}
+
+.company-container-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.company-names-content {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.div-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-company {
+  width: 300px;
+  padding: 8px 10px 8px 10px;
+  border: 1px solid #c0c0c0;
+  outline: none;
+  color: #333333;
+  border-radius: 5px;
+}
+
+.input-company-email {
+  width: 300px;
+  padding: 8px 10px 8px 10px;
+  border: 1px solid #c0c0c0;
+  outline: none;
+  color: #333333;
+  border-radius: 5px;
+}
+
+.input-company-cep {
+  width: 100px;
+  padding: 8px 10px 8px 10px;
+  border: 1px solid #c0c0c0;
+  outline: none;
+  color: #333333;
+  border-radius: 5px;
+}
+
+.div-column-cep {
+  display: flex;
+  flex-direction: column;
+  margin-right: 510px;
+  padding-top: 10px;
+}
+
+.input-company-address {
+  width: 500px;
+  padding: 8px 10px 8px 10px;
+  border: 1px solid #c0c0c0;
+  outline: none;
+  color: #333333;
+  border-radius: 5px;
+}
+
+.input-company-number {
+  width: 100px;
+  padding: 8px 10px 8px 10px;
+  border: 1px solid #c0c0c0;
+  outline: none;
+  color: #333333;
+  border-radius: 5px;
+}
+
+.company-container-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.company-container-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-company {
+  width: 162px;
+  height: 30px;
+  background-color: #043265;
+  outline: none;
+  border: none;
+  color: white;
+  border-radius: 3px;
+  margin-left: 520px;
+  margin-top: 30px;
+}
+
+.button-company:hover {
+  background-color: #042d5c;
+}
+
+.error-message {
+  color: red;
+  font-size: 10px;
+}
