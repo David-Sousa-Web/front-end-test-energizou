@@ -30,9 +30,8 @@ export default function UpdateEmpresa() {
       [event.target.name]: event.target.value,
     });
 
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    setIsEmailValid(validateEmail(newEmail));
+    setEmail(updateCompanyState.Email);
+    setIsEmailValid(validateEmail(updateCompanyState.Email));
   };
 
   useEffect(() => {

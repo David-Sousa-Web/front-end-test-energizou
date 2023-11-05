@@ -1,14 +1,16 @@
-import { FormEvent, useState, ChangeEvent } from "react";
+import { FormEvent, useState, ChangeEvent, useEffect } from "react";
 import { api } from "../../lib/api";
 import "./NovaEmpresa.css";
 import { useNavigate } from "react-router-dom";
 import InputMask from "react-input-mask";
 import validateEmail from "../../lib/EmailValidator";
+import axios from "axios";
 
 export default function NovaEmpresa() {
   const companyNavigate = useNavigate();
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [cep, setCep] = useState("");
   const [postCompany, setPostCompany] = useState({
     NomedoCliente: "",
     Senha: "",
@@ -21,11 +23,34 @@ export default function NovaEmpresa() {
   });
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPostCompany({
-      ...postCompany,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value } = event.target;
+    if (name === "CEP") {
+      const cepWithoutMask = value.replace(/\D/g, "");
+      setCep(cepWithoutMask);
+    } else {
+      setPostCompany({
+        ...postCompany,
+        [name]: value,
+      });
+    }
   };
+
+  useEffect(() => {
+    if (cep.length === 8) {
+      axios
+        .get(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => {
+          const { data } = response;
+          setPostCompany((prevState) => ({
+            ...prevState,
+            Endereco: data.logradouro,
+          }));
+        })
+        .catch((error) => {
+          console.error("Erro ao obter dados do CEP:", error);
+        });
+    }
+  }, [cep]);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.target.value;
@@ -47,7 +72,7 @@ export default function NovaEmpresa() {
         Senha: postCompany.Senha,
         NomedaEmpresa: postCompany.NomedaEmpresa,
         CNPJ: postCompany.CNPJ,
-        CEP: postCompany.CEP,
+        CEP: cep,
         Endereco: postCompany.Endereco,
         Numero: Number(postCompany.Numero),
         Telefone: postCompany.Telefone,
@@ -187,7 +212,7 @@ export default function NovaEmpresa() {
               id="cep"
               name="CEP"
               onChange={handleInputChange}
-              value={postCompany.CEP}
+              value={cep}
               className="input-company-cep"
               required
             />
@@ -206,6 +231,7 @@ export default function NovaEmpresa() {
                 value={postCompany.Endereco}
                 className="input-company-address"
                 required
+                disabled
               />
             </div>
 
